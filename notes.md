@@ -25,3 +25,7 @@ p {
 
 # LeafNode a type of HTMLNode that represents a single HTML tag with no children <p> tag with some text inside
     It's a leaf in a tree of HTML nodes
+
+# Markdown parsers often support nesting of inline elements (bold within italics) will not be doing that for this project for simplicity
+    Can do later if interested
+
