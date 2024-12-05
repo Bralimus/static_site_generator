@@ -1,36 +1,17 @@
 from textnode import *
 from htmlnode import *
-import os
-import shutil
-
-def overwrite_contents(source, destination):
-    delete_contents(destination)
-    copy_contents(source, destination)
+from copy_contents import *
 
 
-def delete_contents(directory):
-    contents = os.listdir(directory)
-    for content in contents:
-        path = os.path.join(directory, content)
-        if os.path.isdir(path):
-            shutil.rmtree(path)
-        if os.path.isfile(path):
-            os.remove(path)
-
-
-def copy_contents(source, destination):
-    if not os.path.exists(destination):
-        os.makedirs(destination)
-    to_copy = os.listdir(source)
-    for content in to_copy:
-        source_path = os.path.join(source, content)
-        destination_path = os.path.join(destination, content)
-        if os.path.isdir(source_path):
-            copy_contents(source_path, destination_path)
-        if os.path.isfile(source_path):
-            shutil.copy(source_path, destination_path) 
+dir_path_static = "./static"
+dir_path_public = "./public"
 
 def main():
-    overwrite_contents("static", "public")
+    print("Deleting public directory")
+    if os.path.exists(dir_path_public):
+        shutil.rmtree(dir_path_public)
+    
+    print("Copying static files to public directory")
+    copy_contents(dir_path_static, dir_path_public)
 
 main()
